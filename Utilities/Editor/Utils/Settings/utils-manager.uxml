@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Utils/Editor/Utils/Counter/style.uss?fileID=7433441132597879392&amp;guid=0b1e818fdde9a77529eb24084495dce7&amp;type=3#style" />
+    <ui:VisualElement name="counter" class="section" style="flex-grow: 0;">
+        <ui:Label tabindex="-1" text="Compilation counter" parse-escape-sequences="true" display-tooltip-when-elided="true" class="section-label" style="-unity-text-align: middle-left;" />
+        <ui:Toggle label="Disable log messages" name="disable-dmesg-option" />
+        <ui:Button text="Reset counter" parse-escape-sequences="true" display-tooltip-when-elided="true" name="reset-counter-button" />
+    </ui:VisualElement>
+    <ui:VisualElement name="scene-loader" class="section" style="flex-grow: 0;">
+        <ui:Label tabindex="-1" text="Scene loader" parse-escape-sequences="true" display-tooltip-when-elided="true" class="section-label" style="-unity-text-align: middle-left;" />
+        <ui:ListView name="scenes" show-foldout-header="true" header-title="Scenes" show-add-remove-footer="true" reorderable="true" horizontal-scrolling="false" show-border="true" />
+    </ui:VisualElement>
+</ui:UXML>
