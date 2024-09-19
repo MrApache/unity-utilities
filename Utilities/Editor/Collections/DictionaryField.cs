@@ -125,7 +125,7 @@ namespace Irisu.Collections
             _valueType = null!;
 
             _fieldStyle = AssetDatabase.LoadAssetAtPath<StyleSheet>(
-                "Assets/Utilities/Utilities/Editor/Collections/field.uss");
+                "Packages/com.irisu.utilities/Utilities/Editor/Collections/field.uss");
 
             _bindings = new List<Binding>();
 
