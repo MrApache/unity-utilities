@@ -6,9 +6,16 @@ namespace Irisu.Utilities
     [PublicAPI]
     public static class VisualElementExtensions
     {
-        public static void Enable(this VisualElement element, bool value)
+        public static T AddTo<T>(this T element, VisualElement root) where T : VisualElement
         {
-            element.style.display = value ? DisplayStyle.Flex : DisplayStyle.None;
+            root.Add(element);
+            return element;
+        }
+
+        public static T Enable<T>(this T element, bool enable) where T : VisualElement
+        {
+            element.style.display = enable ? DisplayStyle.Flex : DisplayStyle.None;
+            return element;
         }
 
         public static bool IsEnabled(this VisualElement element)

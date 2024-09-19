@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -14,11 +15,106 @@ namespace Irisu.Utilities
     [PublicAPI]
     public static class EditorUtils
     {
+        //With unity support
+        public static bool IsUnitySupportedType(this Type type)
+        {
+            if (type == typeof(int))
+                return true;
+            if (type == typeof(uint))
+                return true;
+            if (type == typeof(long))
+                return true;
+            if (type == typeof(ulong))
+                return true;
+            if (type == typeof(short))
+                return true;
+            if (type == typeof(ushort))
+                return true;
+            if (type == typeof(byte))
+                return true;
+            if (type == typeof(sbyte))
+                return true;
+            if (type == typeof(float))
+                return true;
+            if (type == typeof(double))
+                return true;
+            if (type == typeof(char))
+                return true;
+            if (type == typeof(bool))
+                return true;
+            if (type == typeof(string))
+                return true;
+            if (type == typeof(Vector2))
+                return true;
+            if (type == typeof(Vector3))
+                return true;
+            if (type == typeof(Vector4))
+                return true;
+            if (type == typeof(Vector2Int))
+                return true;
+            if (type == typeof(Vector3Int))
+                return true;
+            if (typeof(Enum).IsAssignableFrom(type))
+                return true;
+
+            return false;
+        }
+
+        public static object? GetPropertyValue(this SerializedProperty property)
+        {
+            return property.propertyType switch
+            {
+                SerializedPropertyType.Integer => property.intValue,
+                SerializedPropertyType.Boolean => property.boolValue,
+                SerializedPropertyType.Float => property.floatValue,
+                SerializedPropertyType.String => property.stringValue,
+                SerializedPropertyType.Color => property.colorValue,
+                SerializedPropertyType.ObjectReference => property.objectReferenceValue,
+                SerializedPropertyType.Enum => property.enumValueIndex,
+                SerializedPropertyType.Vector2 => property.vector2Value,
+                SerializedPropertyType.Vector3 => property.vector3Value,
+                SerializedPropertyType.Vector4 => property.vector4Value,
+                SerializedPropertyType.Rect => property.rectValue,
+                SerializedPropertyType.ArraySize => property.arraySize,
+                SerializedPropertyType.AnimationCurve => property.animationCurveValue,
+                SerializedPropertyType.Bounds => property.boundsIntValue,
+                SerializedPropertyType.Gradient => property.gradientValue,
+                SerializedPropertyType.Quaternion => property.quaternionValue,
+                SerializedPropertyType.ExposedReference => property.exposedReferenceValue,
+                SerializedPropertyType.FixedBufferSize => property.fixedBufferSize,
+                SerializedPropertyType.Vector2Int => property.vector2IntValue,
+                SerializedPropertyType.Vector3Int => property.vector3Value,
+                SerializedPropertyType.RectInt => property.rectValue,
+                SerializedPropertyType.BoundsInt => property.boundsIntValue,
+                SerializedPropertyType.ManagedReference => property.managedReferenceValue,
+                SerializedPropertyType.Hash128 => property.hash128Value,
+                /*
+                SerializedPropertyType.Generic =>,
+                SerializedPropertyType.LayerMask => ,
+                SerializedPropertyType.Character => ,
+                */
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
         public static Type GetExposedType(this SerializedProperty property)
         {
-            Type parentType = property.serializedObject.targetObject.GetType();
-            FieldInfo fi = parentType.FindField(property.propertyPath)!;
+            FieldInfo fi = GetField(property.serializedObject.targetObject, property.propertyPath)!; //TODO Fix??
             return fi.FieldType;
+        }
+
+        private static FieldInfo? GetField(object target, string fieldName)
+        {
+            Type? type = target.GetType();
+            FieldInfo? field = null;
+            while (type != null)
+            {
+                field = type.FindField(fieldName);
+                if (field != null)
+                    break;
+                type = type.BaseType;
+            }
+            return field;
         }
         
         public static VisualElement QRemove(this VisualElement element, string elementName)

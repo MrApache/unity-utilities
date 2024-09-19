@@ -4,11 +4,11 @@ using UnityEngine.UIElements;
 namespace Irisu.Collections
 {
     [CustomPropertyDrawer(typeof(SerializableDictionary<,>))]
-    public sealed class SerializableDictionaryDrawer : PropertyDrawer
+    public sealed class DictionaryDrawer : PropertyDrawer
     {
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
-            SerializableDictionaryField field = new SerializableDictionaryField(property.displayName);
+            DictionaryField field = new DictionaryField(property.displayName);
             field.Bind(property);
             return field;
         }

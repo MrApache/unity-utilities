@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Irisu.Collections
 {
     [PublicAPI]
-    public static class DictionaryExtensions
+    internal static class DictionaryExtensions
     {
         public static void ToDictionary<TK, TV>(this List<SerializablePair<TK, TV>> serializablePairs,
             Dictionary<TK, TV> dictionary, bool clearDictionary)

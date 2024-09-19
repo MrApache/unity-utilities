@@ -1,0 +1,28 @@
+.dictionary-field > .unity-base-field__input {
+    border-radius: 0;
+}
+
+.dictionary-field > * > .unity-base-field__input {
+    border-radius: 0;
+}
+
+.dictionary-key-field {
+    padding-right: 4px;
+}
+
+.dictionary-value-field {
+    flex-grow: 1;
+    padding-right: 8px;
+}
+
+.dictionary-lazy-key-field-fail {
+    background-color: darkred;
+}
+
+.dictionary-lazy-key-field-contains {
+    background-color: darkorange;
+}
+
+.dictionary-lazy-key-field-success {
+    background-color: darkgreen;
+}
