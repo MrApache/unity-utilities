@@ -4,7 +4,7 @@ using UnityEditor.UIElements;
 
 namespace Irisu.Utilities.UIElements
 {
-    internal sealed class ToolbarLabel : Toolbar
+    public sealed class ToolbarLabel : Toolbar
     {
         private readonly Label _label;
         public string Text
@@ -12,9 +12,6 @@ namespace Irisu.Utilities.UIElements
             get => _label.text;
             set => _label.text = value;
         }
-
-        public ToolbarLabel() : this(string.Empty)
-        { }
 
         public ToolbarLabel(string label)
         {

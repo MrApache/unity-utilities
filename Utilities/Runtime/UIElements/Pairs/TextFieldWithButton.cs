@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace Irisu.Utilities.UIElements
 {
-    internal sealed class TextFieldWithButton : ElementPair<TextField, Button>
+    public sealed class TextFieldWithButton : ElementPair<TextField, Button>
     {
         public TextFieldWithButton() : this(string.Empty)
         { }

@@ -2,7 +2,7 @@ using UnityEngine.UIElements;
 
 namespace Irisu.Utilities.UIElements
 {
-    internal class ElementPair<T1, T2> : VisualElement
+    public class ElementPair<T1, T2> : VisualElement
         where T1 : VisualElement, new()
         where T2 : VisualElement, new()
     {
